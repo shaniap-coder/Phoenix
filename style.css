@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at center, #020202 30%, #000 100%);
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #ff99cc33, #00000088);
+  filter: blur(40px);
+  z-index: 0;
+}
+
+.gift-container {
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.gift-box {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+}
+
+.gift-box .lid {
+  position: absolute;
+  width: 150px;
+  height: 40px;
+  background: linear-gradient(90deg, #ff66cc, #ff3399);
+  top: 0;
+  left: 0;
+  border-radius: 10px 10px 0 0;
+  transition: 1s ease;
+}
+
+.gift-box .box {
+  position: absolute;
+  width: 150px;
+  height: 110px;
+  background: linear-gradient(90deg, #ff99cc, #ff66aa);
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 10px 10px;
+  transition: 0.3s;
+}
+
+#openBtn {
+  background: #ff66cc;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  margin-top: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+#openBtn:hover {
+  background: #ff3399;
+}
+
+.gift-box.open .box {
+  animation: boxGlow 1.5s ease forwards;
+}
+
+@keyframes boxGlow {
+  0% { box-shadow: 0 0 0px #ff66cc; }
+  50% { box-shadow: 0 0 30px #ff66cc; transform: scale(1.05); }
+  100% { box-shadow: 0 0 10px #ff99cc; transform: scale(1); }
+}
+
+#surprise {
+  display: none;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  position: absolute;
+  inset: 0;
+  text-align: center;
+}
+
+#surprise.show {
+  display: block;
+  opacity: 1;
+}
+
+canvas#effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  animation: fadeIn 5s ease forwards;
+  z-index: 5;
+}
+
+.message h1 {
+  font-size: 3rem;
+  color: #fff;
+  text-shadow: 0 0 15px #ff99cc;
+  opacity: 0;
+  animation: fadeInText 5s 1.5s forwards;
+}
+
+.message p {
+  margin-top: 15px;
+  font-size: 1.5rem;
+  color: #ffddee;
+  opacity: 0;
+  animation: fadeInText 5s 3s forwards;
+}
+
+#giftBtn {
+  background: #ff66cc;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  margin-top: 25px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+  display: none;
+  opacity: 0;
+  animation: fadeInText 3s 5.5s forwards;
+}
+
+#giftBtn:hover {
+  background: #ff3399;
+}
+
+#giftMsg {
+  margin-top: 15px;
+  font-size: 1.4rem;
+  color: #ffe6f3;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+#giftMsg.show {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInText {
+  to { opacity: 1; }
+}
+
+#musicBtn,
+#restartBtn {
+  position: absolute;
+  bottom: 20px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid #fff;
+  border-radius: 25px;
+  color: #fff;
+  padding: 8px 16px;
+  cursor: pointer;
+  z-index: 10;
+  display: none;
+}
+
+#musicBtn { right: 20px; }
+#restartBtn { left: 20px; }
