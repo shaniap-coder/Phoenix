@@ -1,3 +1,4 @@
+// 🌸 Get all elements
 const giftBox = document.getElementById("giftBox");
 const openBtn = document.getElementById("openBtn");
 const surprise = document.getElementById("surprise");
@@ -7,11 +8,25 @@ const restartBtn = document.getElementById("restartBtn");
 const giftBtn = document.getElementById("giftBtn");
 const giftMsg = document.getElementById("giftMsg");
 
+// 🎵 When user clicks "Tap This"
 openBtn.addEventListener("click", () => {
-  giftBox.classList.add("open");
-  document.querySelector(".lid").style.transform = "translateY(-150px) rotate(-20deg)";
-  document.querySelector(".lid").style.transition = "1.2s ease";
+  // Try to play music automatically when user interacts
+  music.play()
+    .then(() => {
+      musicBtn.textContent = "🔇 Stop Music";
+    })
+    .catch(err => {
+      console.log("Autoplay blocked by browser:", err);
+      musicBtn.textContent = "🎵 Play Music";
+    });
 
+  // 🎁 Open the gift animation
+  giftBox.classList.add("open");
+  const lid = document.querySelector(".lid");
+  lid.style.transform = "translateY(-150px) rotate(-20deg)";
+  lid.style.transition = "1.2s ease";
+
+  // 🎉 After animation ends, show surprise
   setTimeout(() => {
     document.querySelector(".gift-container").style.display = "none";
     surprise.classList.add("show");
@@ -22,6 +37,7 @@ openBtn.addEventListener("click", () => {
   }, 1500);
 });
 
+// 🎵 Music play/pause toggle
 musicBtn.addEventListener("click", () => {
   if (music.paused) {
     music.play();
@@ -32,16 +48,20 @@ musicBtn.addEventListener("click", () => {
   }
 });
 
+// 🔁 Restart the surprise
 restartBtn.addEventListener("click", () => {
   surprise.classList.remove("show");
   setTimeout(() => location.reload(), 500);
 });
 
+// 💌 Show gift message
 giftBtn.addEventListener("click", () => {
-  giftMsg.textContent = "💌 Sorry I’m not there to make something special for you, but you have three wishes — and if I can, I’ll make them all come true.😅";
+  giftMsg.textContent =
+    "💌 Sorry I’m not there to make something special for you, but you have three wishes — and if I can, I’ll make them all come true.😅";
   giftMsg.classList.add("show");
 });
 
+// ✨ Effects animation (hearts, petals, sparkles, doves)
 function startEffects() {
   const canvas = document.getElementById("effects");
   const ctx = canvas.getContext("2d");
@@ -148,11 +168,13 @@ function startEffects() {
     }
   }
 
+  // 🌸 Create elements
   for (let i = 0; i < 15; i++) doves.push(new Dove());
   for (let i = 0; i < 50; i++) petals.push(new Petal());
   for (let i = 0; i < 80; i++) sparkles.push(new Spark());
   for (let i = 0; i < 20; i++) hearts.push(new Heart());
 
+  // 🌈 Animate all
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     sparkles.forEach(s => s.update());
